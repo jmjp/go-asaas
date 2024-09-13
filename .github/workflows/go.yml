@@ -1,0 +1,38 @@
+#file: noinspection SpellCheckingInspection
+name: Go
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: '1.21.x'
+      - name: Display Go version
+        run: go version
+      - name: Install dependencies
+        run: |
+          go mod download
+      - name: Run Unit tests
+        env:
+          ASAAS_ACCESS_TOKEN: ${{ secrets.ASAAS_ACCESS_TOKEN }}
+          ASAAS_ACCESS_TOKEN_SECONDARY: ${{ secrets.ASAAS_ACCESS_TOKEN_SECONDARY }}
+          ASAAS_WALLET_ID: ${{ secrets.ASAAS_WALLET_ID }}
+          ASAAS_WALLET_ID_SECONDARY: ${{ secrets.ASAAS_WALLET_ID_SECONDARY }}
+          COVERALLS_TOKEN: ${{ secrets.COVERALLS_TOKEN }}
+        run: |
+          go test -race -covermode atomic -coverprofile=covprofile ./asaas/...
+      - name: Install goveralls
+        run: go install github.com/mattn/goveralls@latest
+      - name: Send coverage
+        env:
+          COVERALLS_TOKEN: ${{ secrets.COVERALLS_TOKEN }}
+        run: goveralls -coverprofile=covprofile -service=github

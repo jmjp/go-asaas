@@ -1,0 +1,4 @@
+github.com/jmjp/go-asaas v1.0.2 h1:TXRmge9Z99DVXViRrhSnJX53bnjut0dDzNzmoA6YF5Q=
+github.com/jmjp/go-asaas v1.0.2/go.mod h1:uDOHJc/ela71l2hPstP4/Hq70hQmThXP1LUNOJAgNj4=
+github.com/mvrilo/go-cpf v0.0.0-20150109121854-4113d38c8d21 h1:YPCOJF8DBm+WyORRxVj6maVZkx/Von4+JxfNJ8DjJhw=
+github.com/mvrilo/go-cpf v0.0.0-20150109121854-4113d38c8d21/go.mod h1:yYdoTli5ejfoOkQX4/hP97HEoULZBMTRhiD0p9UM/oc=
